@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\LaptopAZ.vn\source\repos\codedao2\codedao2\commonFuntion.h(23,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\LaptopAZ.vn\source\repos\codedao2\codedao2\main.cpp(110,21): warning C4018: '<': signed/unsigned mismatch
+  codedao2.vcxproj -> C:\Users\LaptopAZ.vn\source\repos\codedao2\Debug\codedao2.exe

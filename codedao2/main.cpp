@@ -41,6 +41,7 @@ int main(int argc, char* argv[]) {
 	//init background - a base object
 	BaseObject g_background;
 	if (!g_background.loadTexture("img//BG.png", g_screen)) return -1;
+	g_background.setContentSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;

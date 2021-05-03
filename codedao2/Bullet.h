@@ -39,7 +39,7 @@ public:
 
 	void update(float dt){
 		this.setPosition(x, y - BULLET_SPEED * dt/1000);
-		if (y <= -rect_.h / 2) onDestroy();
+		if (y <= -rect_.h / 2f) onDestroy();
 	}
 };
 

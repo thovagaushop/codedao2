@@ -132,16 +132,32 @@ public:
     }
 
     void render(){
-        plane.render(g_screen);
-        vector<Bullet*> bullets = bulletPool.getActiveObjects();
-        for (int i = 0; i < bullets.size(); i++){
-            bullets[i]->render(g_screen);
-        }
+        switch(state){
+            case GameManager::STATE_WAIT: break;
+            case GameManager::STATE_READY: break;
+                plane.render(g_screen);
+            case GameManager::STATE_RUN:
+                plane.render(g_screen);
+                vector<Bullet*> bullets = bulletPool.getActiveObjects();
+                for (int i = 0; i < bullets.size(); i++){
+                    bullets[i]->render(g_screen);
+                }
+                vector<ThreatObject*> threats = threatPool.getActiveObjects();
+                for (int i = 0; i < threats.size(); i++){
+                    threats[i]->render(g_screen);
+                }
+                break;
+            case GameManager::STATE_END:
+                break;
     }
 
     void spawnBullet(float x, float y){
         Bullet* bullet = bulletPool.pop();
         bullet->setPosition(x, y);
+    }
+
+    void spawnThreat(){
+        
     }
 };
 

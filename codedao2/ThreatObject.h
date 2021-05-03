@@ -50,6 +50,7 @@ public:
 
 	void update(float dt){
 		this->setPosition(x, y + THREAT_SPEED * dt/1000);
+		if (y > SCREEN_HEIGHT - rect_.h/2f) onDestroy();
 	}
 
 	void onHit(){

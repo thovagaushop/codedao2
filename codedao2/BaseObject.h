@@ -1,24 +1,32 @@
 #pragma once
-#ifndef BASE_OBJECT_H_
-#define BASE_OBJECT_H_
+#ifndef BASE_OBJECT_H
+#define BASE_OBJECT_H
 
-#include "commonFuntion.h"
+#include "CommonFuntion.h"
 
 class BaseObject {
 public:
 	BaseObject();
 	~BaseObject();
-	void SetRect(const int& x, const int& y) {rect_.x = x, rect_.y = y;}
-	SDL_Rect GetRect() const { return rect_; }
-	SDL_Texture* GetObject() const { return p_object_; }
 
-	virtual bool LoadImg(std::string path, SDL_Renderer* screen);
-	void Render(SDL_Renderer* des, const SDL_Rect* clip = NULL);
-	void Free();
+	//Transformation
+	void setPosition(float x, float y);
+	float getPositionX();
+	float getPositionY();
+	void setContentSize(int width, int height);
+
+	//Renderer
+	SDL_Rect getRect() const { return rect_; }
+	bool loadTexture(std::string path, SDL_Renderer* screen);
+	void render(SDL_Renderer* des, const SDL_Rect* clip = NULL);
+	void free();
+
+	//Logic
+	virtual void update(float dt){}
 
 protected:
-	SDL_Texture* p_object_;
+	float x, float y;
+	SDL_Texture* texture;
 	SDL_Rect rect_;
-
 };
 #endif // !BASE_OBJECT_H_

@@ -1,4 +1,4 @@
-#include"commonFuntion.h"
+#include"CommonFuntion.h"
 
 bool SDLCommonFuntion::CheckCollide(const SDL_Rect& object1, const SDL_Rect& object2)
 {

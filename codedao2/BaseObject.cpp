@@ -1,20 +1,21 @@
 #include"BaseObject.h"
 
 BaseObject::BaseObject() {
-	p_object_ = NULL;
+	texture = NULL;
+	x = 0.0f;
+	y = 0.0f;
 	rect_.x = 0;
 	rect_.y = 0;
 	rect_.w = 0;
 	rect_.h = 0;
-
 }
 
 BaseObject::~BaseObject() {
-	Free();
+	free();
 }
 
-bool BaseObject::LoadImg(std::string path, SDL_Renderer* screen) {
-	Free();
+bool BaseObject::loadTexture(std::string path, SDL_Renderer* screen) {
+	free();
 	SDL_Texture* new_texture = NULL;
 
 	SDL_Surface* load_surface = IMG_Load(path.c_str());
@@ -27,19 +28,39 @@ bool BaseObject::LoadImg(std::string path, SDL_Renderer* screen) {
 		}
 		SDL_FreeSurface(load_surface);
 	}
-	p_object_ = new_texture;
-	return p_object_ != NULL;
+	texture = new_texture;
+	return texture != NULL;
 }
 
-void BaseObject::Render(SDL_Renderer* des, const SDL_Rect* clip) {
+void setPosition(int x, int y){
+	this->x = x;
+	this->y = y;
+	rect_.x = (int)round(x - rect_.w/2);
+	rect_.y = (int)round(y - rect_.h/2);
+}
+
+float getPositionX(){
+	return x;
+}
+
+float getPositionY(){
+	return y;
+}
+
+void setContentSize(int width, int height){
+	rect_.w = width;
+	rect_.h = height;
+}
+
+void BaseObject::render(SDL_Renderer* des, const SDL_Rect* clip) {
 	SDL_Rect renderquad = { rect_.x, rect_.y , rect_.w , rect_.h };
-	SDL_RenderCopy(des, p_object_, clip, &renderquad);
+	SDL_RenderCopy(des, texture, clip, &renderquad);
 }
 
-void BaseObject::Free() {
-	if (p_object_ != NULL) {
-		SDL_DestroyTexture(p_object_);
-		p_object_ = NULL;
+void BaseObject::free() {
+	if (texture != NULL) {
+		SDL_DestroyTexture(texture);
+		texture = NULL;
 		rect_.w = 0;
 		rect_.h = 0;
 	}
